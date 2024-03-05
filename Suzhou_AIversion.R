@@ -1324,7 +1324,6 @@ server <- function(input, output, session) {
           updateRemainingDeck()
         }
         else if (length(if_can_dianpao(player, current_bugang)) == 2) {
-          session$sendCustomMessage("gangSound", list(playCondition = TRUE))
           isQianggangING(1)
           shinyalert(title = "AI玩家补杠", text = paste("玩家", player, " 补杠了！", "\n接下来应该由玩家" , player, "抓牌并打出一张牌", "\n但玩家" , if_can_dianpao(player, current_bugang)[1], "和玩家", if_can_dianpao(player, current_bugang)[2], "都提出抢杠请求"),
                      type = "warning", showConfirmButton = FALSE, timer = 1000, imageUrl = "gang.jpg",
@@ -1338,7 +1337,6 @@ server <- function(input, output, session) {
           updateRemainingDeck()
         }
         else if (length(if_can_dianpao(player, current_bugang)) == 1) {
-          session$sendCustomMessage("gangSound", list(playCondition = TRUE))
           isQianggangING(1)
           shinyalert(title = "AI玩家补杠", text = paste("玩家", player, " 补杠了！", "\n接下来应该由玩家" , player, "抓牌并打出一张牌", "\n但玩家" , if_can_dianpao(player, current_bugang)[1], "提出抢杠请求"),
                      type = "warning", showConfirmButton = FALSE, timer = 1000, imageUrl = "gang.jpg",
@@ -1352,7 +1350,6 @@ server <- function(input, output, session) {
           updateRemainingDeck()
         }
         else {
-          session$sendCustomMessage("gangSound", list(playCondition = TRUE))
           shinyalert(title = "AI玩家补杠", text = paste("玩家", player, " 补杠了！", "\n接下来应该由玩家" , player, "抓牌并打出一张牌"),
                      type = "info", showConfirmButton = FALSE, timer = 1000, imageUrl = "gang.jpg",
                      callbackR = function(x){
