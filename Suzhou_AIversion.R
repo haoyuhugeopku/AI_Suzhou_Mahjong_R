@@ -777,6 +777,7 @@ server <- function(input, output, session) {
         scorepad[3] <<- scorepad[3] + scorelist[3]
         scorepad[4] <<- scorepad[4] + scorelist[4]
         isHu(1)
+        nextdealer(1)
       }
 
       else {
@@ -835,6 +836,7 @@ server <- function(input, output, session) {
         scorepad[3] <<- scorepad[3] + scorelist[3]
         scorepad[4] <<- scorepad[4] + scorelist[4]
         isHu(1)
+        nextdealer(0)
       }
     }
     else {
@@ -968,6 +970,7 @@ server <- function(input, output, session) {
       scorepad[3] <<- scorepad[3] + scorelist[3]
       scorepad[4] <<- scorepad[4] + scorelist[4]
       isHu(1)
+      nextdealer(1)
     }
     else {
       shinyalert(title = "无法抢杠！", text = paste("玩家", player, " 当前无法抢杠！"),
@@ -1029,6 +1032,7 @@ server <- function(input, output, session) {
       scorepad[3] <<- scorepad[3] + scorelist[3]
       scorepad[4] <<- scorepad[4] + scorelist[4]
       isHu(1)
+      nextdealer(1)
     }
     else {
       shinyalert(title = "无法自摸！", text = paste("玩家", player, " 当前无法自摸！"),
@@ -1151,6 +1155,7 @@ server <- function(input, output, session) {
           }
         }
         else {
+          isHuangzhuang(if_huangzhuang)
           shinyalert(title = "无法抓牌！", text = paste("玩家", player, " 当前无法抓牌！"),
                      type = "error", showConfirmButton = TRUE)
           notice("")
@@ -1277,6 +1282,9 @@ server <- function(input, output, session) {
         else {
           AIdrawing(player)
         }
+      }
+      else {
+        isHuangzhuang(if_huangzhuang)
       }
     }
   }
