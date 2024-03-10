@@ -229,7 +229,7 @@ text_ultra <- function(x) {
   }
 }
 
-# 番型：清龙
+# 番型：一条龙
 is_longdragon <- function(player, card) { 
   suits <- suppressWarnings(sapply(card, function(x) substr(x, 2, 2)))  
   numbers <- suppressWarnings(sapply(card, function(x) as.numeric(substr(x, 1, 1))))  
@@ -257,7 +257,7 @@ is_longdragon <- function(player, card) {
 }
 text_longdragon <- function(x) {
   if (x) {
-    return(paste("\n清龙：", 10, "花"))
+    return(paste("\n一条龙：", 10, "花"))
   }
 }
 
@@ -363,7 +363,7 @@ hutypes <- function(player, card) {
   }
   if (is_longdragon(player, card))
   {
-    hutype <- "清龙"
+    hutype <- "一条龙"
   }
   if (is_normal_seven_pairs(player, card))
   {
