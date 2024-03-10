@@ -104,6 +104,9 @@ ui <- fluidPage(
           src: ['canplay.mp3']
         });
         audioElementcanPlay.volume(0.5);
+      var audioElementEnd = new Howl({
+          src: ['end.mp3']
+        });
       var audioElementStart = new Howl({
           src: ['start.mp3']
         });
@@ -176,6 +179,11 @@ ui <- fluidPage(
       }
       Shiny.addCustomMessageHandler('canplaySound', function(message) {
         audioElementcanPlay.play()
+      });
+      Shiny.addCustomMessageHandler('endSound', function(message) {
+        if (message.playCondition) {
+          audioElementEnd.play();
+        }
       });
       Shiny.addCustomMessageHandler('startSound', function(message) {
         if (message.playCondition) {
@@ -761,7 +769,8 @@ server <- function(input, output, session) {
                                 text_flower_small_three_dragons(is_flower_small_three_dragons(player, final_cards)),
                                 text_diling(diling)),
                    type = "success", showConfirmButton = TRUE,
-                   imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"))
+                   imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"),
+                   callbackJS = "function() { Shiny.setInputValue('alertEnd', true); setTimeout(function() { Shiny.setInputValue('alertEnd', false);}, 1000); }")
         scorelist <- c(0,0,0,0)
         scorelist[as.numeric(player)] <- score
         scorelist[as.numeric(current_played_player)] <- -score
@@ -820,7 +829,8 @@ server <- function(input, output, session) {
                                   text_flower_small_three_dragons(is_flower_small_three_dragons(player, final_cards)),
                                   text_diling(diling)),
                      type = "success", showConfirmButton = TRUE,
-                     imageUrl = paste0("huimages/", hutypes(playeri, final_cards), ".jpg"))
+                     imageUrl = paste0("huimages/", hutypes(playeri, final_cards), ".jpg"),
+                     callbackJS = "function() { Shiny.setInputValue('alertEnd', true); setTimeout(function() { Shiny.setInputValue('alertEnd', false);}, 1000); }")
           scorelist[as.numeric(playeri)] <- score
           scorelist[as.numeric(current_played_player)] <- scorelist[as.numeric(current_played_player)] - score
         }
@@ -954,7 +964,9 @@ server <- function(input, output, session) {
                               text_flower_three_dragons(is_flower_three_dragons(player, final_cards)),
                               text_flower_small_three_dragons(is_flower_small_three_dragons(player, final_cards)),
                               text_diling(diling)),
-                 type = "success", showConfirmButton = TRUE)
+                 type = "success", showConfirmButton = TRUE,
+                 imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"),
+                 callbackJS = "function() { Shiny.setInputValue('alertEnd', true); setTimeout(function() { Shiny.setInputValue('alertEnd', false);}, 1000); }")
       scorelist <- c(0,0,0,0)
       scorelist[as.numeric(player)] <- 3*score
       scorelist[as.numeric(current_bugang_player)] <- -3*score
@@ -1014,7 +1026,8 @@ server <- function(input, output, session) {
                               text_flower_small_three_dragons(is_flower_small_three_dragons(player, final_cards)),
                               text_diling(diling)),
                  type = "success", showConfirmButton = TRUE,
-                 imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"))
+                 imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"),
+                 callbackJS = "function() { Shiny.setInputValue('alertEnd', true); setTimeout(function() { Shiny.setInputValue('alertEnd', false);}, 1000); }")
       scorelist <- c(0,0,0,0)
       for (i in 1:4) {
         scorelist[i] <- -score
@@ -1484,7 +1497,8 @@ server <- function(input, output, session) {
                             text_flower_small_three_dragons(is_flower_small_three_dragons(player, final_cards)),
                             text_diling(diling)),
                type = "success", showConfirmButton = TRUE,
-               imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"))
+               imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"),
+               callbackJS = "function() { Shiny.setInputValue('alertEnd', true); setTimeout(function() { Shiny.setInputValue('alertEnd', false);}, 1000); }")
     scorelist <- c(0,0,0,0)
     scorelist[as.numeric(player)] <- 3*score
     scorelist[as.numeric(current_bugang_player)] <- -3*score
@@ -1536,7 +1550,8 @@ server <- function(input, output, session) {
                             text_flower_small_three_dragons(is_flower_small_three_dragons(player, final_cards)),
                             text_diling(diling)),
                type = "success", showConfirmButton = TRUE,
-               imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"))
+               imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"),
+               callbackJS = "function() { Shiny.setInputValue('alertEnd', true); setTimeout(function() { Shiny.setInputValue('alertEnd', false);}, 1000); }")
     scorelist <- c(0,0,0,0)
     scorelist[as.numeric(player)] <- score
     scorelist[as.numeric(current_played_player)] <- -score
@@ -1596,7 +1611,8 @@ server <- function(input, output, session) {
                               text_flower_small_three_dragons(is_flower_small_three_dragons(player, final_cards)),
                               text_diling(diling)),
                  type = "success", showConfirmButton = TRUE,
-                 imageUrl = paste0("huimages/", hutypes(playeri, final_cards), ".jpg"))
+                 imageUrl = paste0("huimages/", hutypes(playeri, final_cards), ".jpg"),
+                 callbackJS = "function() { Shiny.setInputValue('alertEnd', true); setTimeout(function() { Shiny.setInputValue('alertEnd', false);}, 1000); }")
       scorelist[as.numeric(playeri)] <- score
       scorelist[as.numeric(current_played_player)] <- scorelist[as.numeric(current_played_player)] - score
     }
@@ -1648,7 +1664,8 @@ server <- function(input, output, session) {
                             text_flower_small_three_dragons(is_flower_small_three_dragons(player, final_cards)),
                             text_diling(diling)),
                type = "success", showConfirmButton = TRUE,
-               imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"))
+               imageUrl = paste0("huimages/", hutypes(player, final_cards), ".jpg"),
+               callbackJS = "function() { Shiny.setInputValue('alertEnd', true); setTimeout(function() { Shiny.setInputValue('alertEnd', false);}, 1000); }")
     scorelist <- c(0,0,0,0)
     for (i in 1:4) {
       scorelist[i] <- -score
@@ -1818,6 +1835,11 @@ server <- function(input, output, session) {
   observeEvent(input$alertZimo, {
     if (input$alertZimo) {
       session$sendCustomMessage("zimoSound", list(playCondition = TRUE))
+    }
+  })
+  observeEvent(input$alertEnd, {
+    if (input$alertEnd) {
+      session$sendCustomMessage("endSound", list(playCondition = TRUE))
     }
   })
   observeEvent(input$alertCard, {
